@@ -85,13 +85,29 @@ export const GameMap = ({
               ) : null}
               <div className="flex flex-wrap gap-1 items-center justify-center relative">
                 {terrainEmoji ? (
-                  <div className="absolute inset-0 flex items-center justify-center text-3xl pointer-events-none">
-                    {terrainEmoji}
-                  </div>
+                  // <div className="absolute inset-0 flex 
+                  // items-center justify-center text-3xl pointer-events-none">
+                  //   {terrainEmoji}
+                  // </div>
+                  (terrainEmoji === "tree" ? 
+                    <div className="w-8 h-8 absolute inset-0 flex 
+                    items-center justify-center text-3xl pointer-events-none"
+                    style={{backgroundImage: "url(/assets/path.png)", 
+                    backgroundRepeat: "no-repeat", backgroundPosition: "center",
+                    backgroundSize: "cover"}}
+                    >
+                      </div>
+                      : null)
                 ) : null}
                 <div className="relative">
                   {playersHere?.map((p) => (
-                    <span key={p.entity}>{p.emoji}</span>
+                    // <span key={p.entity}>{p.emoji}</span>
+                    <div className="z-20 w-8 h-8" 
+                    style={{backgroundImage: "url(/assets/claymorebash.gif)",
+                    backgroundRepeat: "no-repeat", backgroundPosition: "center",
+                    backgroundSize: "cover"
+                    }}
+                    key={p.entity}></div>
                   ))}
                 </div>
               </div>
