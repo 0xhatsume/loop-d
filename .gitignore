@@ -1,1 +1,17 @@
 node_modules
+coverage
+coverage.json
+typechain
+
+# mud
+.pnpm-store
+
+#Hardhat files
+cache
+artifacts
+package-lock.json
+
+#IDEs
+.vscode
+.vscode/
+.DS_Store
