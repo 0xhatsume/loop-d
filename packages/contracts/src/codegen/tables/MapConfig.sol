@@ -23,10 +23,12 @@ bytes32 constant MapConfigTableId = _tableId;
 library MapConfig {
   /** Get the table's schema */
   function getSchema() internal pure returns (Schema) {
-    SchemaType[] memory _schema = new SchemaType[](3);
+    SchemaType[] memory _schema = new SchemaType[](5);
     _schema[0] = SchemaType.UINT32;
     _schema[1] = SchemaType.UINT32;
     _schema[2] = SchemaType.BYTES;
+    _schema[3] = SchemaType.UINT8_ARRAY;
+    _schema[4] = SchemaType.UINT8_ARRAY;
 
     return SchemaLib.encode(_schema);
   }
@@ -39,10 +41,12 @@ library MapConfig {
 
   /** Get the table's metadata */
   function getMetadata() internal pure returns (string memory, string[] memory) {
-    string[] memory _fieldNames = new string[](3);
+    string[] memory _fieldNames = new string[](5);
     _fieldNames[0] = "width";
     _fieldNames[1] = "height";
     _fieldNames[2] = "terrain";
+    _fieldNames[3] = "pathx";
+    _fieldNames[4] = "pathy";
     return ("MapConfig", _fieldNames);
   }
 
@@ -232,8 +236,220 @@ library MapConfig {
     _store.updateInField(_tableId, _keyTuple, 2, _index * 1, bytes((_slice)));
   }
 
+  /** Get pathx */
+  function getPathx() internal view returns (uint8[72] memory pathx) {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    bytes memory _blob = StoreSwitch.getField(_tableId, _keyTuple, 3);
+    return toStaticArray_uint8_72(SliceLib.getSubslice(_blob, 0, _blob.length).decodeArray_uint8());
+  }
+
+  /** Get pathx (using the specified store) */
+  function getPathx(IStore _store) internal view returns (uint8[72] memory pathx) {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    bytes memory _blob = _store.getField(_tableId, _keyTuple, 3);
+    return toStaticArray_uint8_72(SliceLib.getSubslice(_blob, 0, _blob.length).decodeArray_uint8());
+  }
+
+  /** Set pathx */
+  function setPathx(uint8[72] memory pathx) internal {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    StoreSwitch.setField(_tableId, _keyTuple, 3, EncodeArray.encode(fromStaticArray_uint8_72(pathx)));
+  }
+
+  /** Set pathx (using the specified store) */
+  function setPathx(IStore _store, uint8[72] memory pathx) internal {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    _store.setField(_tableId, _keyTuple, 3, EncodeArray.encode(fromStaticArray_uint8_72(pathx)));
+  }
+
+  /** Get the length of pathx */
+  function lengthPathx() internal view returns (uint256) {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    uint256 _byteLength = StoreSwitch.getFieldLength(_tableId, _keyTuple, 3, getSchema());
+    return _byteLength / 1;
+  }
+
+  /** Get the length of pathx (using the specified store) */
+  function lengthPathx(IStore _store) internal view returns (uint256) {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    uint256 _byteLength = _store.getFieldLength(_tableId, _keyTuple, 3, getSchema());
+    return _byteLength / 1;
+  }
+
+  /** Get an item of pathx (unchecked, returns invalid data if index overflows) */
+  function getItemPathx(uint256 _index) internal view returns (uint8) {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    bytes memory _blob = StoreSwitch.getFieldSlice(_tableId, _keyTuple, 3, getSchema(), _index * 1, (_index + 1) * 1);
+    return (uint8(Bytes.slice1(_blob, 0)));
+  }
+
+  /** Get an item of pathx (using the specified store) (unchecked, returns invalid data if index overflows) */
+  function getItemPathx(IStore _store, uint256 _index) internal view returns (uint8) {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    bytes memory _blob = _store.getFieldSlice(_tableId, _keyTuple, 3, getSchema(), _index * 1, (_index + 1) * 1);
+    return (uint8(Bytes.slice1(_blob, 0)));
+  }
+
+  /** Push an element to pathx */
+  function pushPathx(uint8 _element) internal {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    StoreSwitch.pushToField(_tableId, _keyTuple, 3, abi.encodePacked((_element)));
+  }
+
+  /** Push an element to pathx (using the specified store) */
+  function pushPathx(IStore _store, uint8 _element) internal {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    _store.pushToField(_tableId, _keyTuple, 3, abi.encodePacked((_element)));
+  }
+
+  /** Pop an element from pathx */
+  function popPathx() internal {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    StoreSwitch.popFromField(_tableId, _keyTuple, 3, 1);
+  }
+
+  /** Pop an element from pathx (using the specified store) */
+  function popPathx(IStore _store) internal {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    _store.popFromField(_tableId, _keyTuple, 3, 1);
+  }
+
+  /** Update an element of pathx at `_index` */
+  function updatePathx(uint256 _index, uint8 _element) internal {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    StoreSwitch.updateInField(_tableId, _keyTuple, 3, _index * 1, abi.encodePacked((_element)));
+  }
+
+  /** Update an element of pathx (using the specified store) at `_index` */
+  function updatePathx(IStore _store, uint256 _index, uint8 _element) internal {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    _store.updateInField(_tableId, _keyTuple, 3, _index * 1, abi.encodePacked((_element)));
+  }
+
+  /** Get pathy */
+  function getPathy() internal view returns (uint8[72] memory pathy) {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    bytes memory _blob = StoreSwitch.getField(_tableId, _keyTuple, 4);
+    return toStaticArray_uint8_72(SliceLib.getSubslice(_blob, 0, _blob.length).decodeArray_uint8());
+  }
+
+  /** Get pathy (using the specified store) */
+  function getPathy(IStore _store) internal view returns (uint8[72] memory pathy) {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    bytes memory _blob = _store.getField(_tableId, _keyTuple, 4);
+    return toStaticArray_uint8_72(SliceLib.getSubslice(_blob, 0, _blob.length).decodeArray_uint8());
+  }
+
+  /** Set pathy */
+  function setPathy(uint8[72] memory pathy) internal {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    StoreSwitch.setField(_tableId, _keyTuple, 4, EncodeArray.encode(fromStaticArray_uint8_72(pathy)));
+  }
+
+  /** Set pathy (using the specified store) */
+  function setPathy(IStore _store, uint8[72] memory pathy) internal {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    _store.setField(_tableId, _keyTuple, 4, EncodeArray.encode(fromStaticArray_uint8_72(pathy)));
+  }
+
+  /** Get the length of pathy */
+  function lengthPathy() internal view returns (uint256) {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    uint256 _byteLength = StoreSwitch.getFieldLength(_tableId, _keyTuple, 4, getSchema());
+    return _byteLength / 1;
+  }
+
+  /** Get the length of pathy (using the specified store) */
+  function lengthPathy(IStore _store) internal view returns (uint256) {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    uint256 _byteLength = _store.getFieldLength(_tableId, _keyTuple, 4, getSchema());
+    return _byteLength / 1;
+  }
+
+  /** Get an item of pathy (unchecked, returns invalid data if index overflows) */
+  function getItemPathy(uint256 _index) internal view returns (uint8) {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    bytes memory _blob = StoreSwitch.getFieldSlice(_tableId, _keyTuple, 4, getSchema(), _index * 1, (_index + 1) * 1);
+    return (uint8(Bytes.slice1(_blob, 0)));
+  }
+
+  /** Get an item of pathy (using the specified store) (unchecked, returns invalid data if index overflows) */
+  function getItemPathy(IStore _store, uint256 _index) internal view returns (uint8) {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    bytes memory _blob = _store.getFieldSlice(_tableId, _keyTuple, 4, getSchema(), _index * 1, (_index + 1) * 1);
+    return (uint8(Bytes.slice1(_blob, 0)));
+  }
+
+  /** Push an element to pathy */
+  function pushPathy(uint8 _element) internal {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    StoreSwitch.pushToField(_tableId, _keyTuple, 4, abi.encodePacked((_element)));
+  }
+
+  /** Push an element to pathy (using the specified store) */
+  function pushPathy(IStore _store, uint8 _element) internal {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    _store.pushToField(_tableId, _keyTuple, 4, abi.encodePacked((_element)));
+  }
+
+  /** Pop an element from pathy */
+  function popPathy() internal {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    StoreSwitch.popFromField(_tableId, _keyTuple, 4, 1);
+  }
+
+  /** Pop an element from pathy (using the specified store) */
+  function popPathy(IStore _store) internal {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    _store.popFromField(_tableId, _keyTuple, 4, 1);
+  }
+
+  /** Update an element of pathy at `_index` */
+  function updatePathy(uint256 _index, uint8 _element) internal {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    StoreSwitch.updateInField(_tableId, _keyTuple, 4, _index * 1, abi.encodePacked((_element)));
+  }
+
+  /** Update an element of pathy (using the specified store) at `_index` */
+  function updatePathy(IStore _store, uint256 _index, uint8 _element) internal {
+    bytes32[] memory _keyTuple = new bytes32[](0);
+
+    _store.updateInField(_tableId, _keyTuple, 4, _index * 1, abi.encodePacked((_element)));
+  }
+
   /** Get the full data */
-  function get() internal view returns (uint32 width, uint32 height, bytes memory terrain) {
+  function get()
+    internal
+    view
+    returns (uint32 width, uint32 height, bytes memory terrain, uint8[72] memory pathx, uint8[72] memory pathy)
+  {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
     bytes memory _blob = StoreSwitch.getRecord(_tableId, _keyTuple, getSchema());
@@ -241,7 +457,13 @@ library MapConfig {
   }
 
   /** Get the full data (using the specified store) */
-  function get(IStore _store) internal view returns (uint32 width, uint32 height, bytes memory terrain) {
+  function get(
+    IStore _store
+  )
+    internal
+    view
+    returns (uint32 width, uint32 height, bytes memory terrain, uint8[72] memory pathx, uint8[72] memory pathy)
+  {
     bytes32[] memory _keyTuple = new bytes32[](0);
 
     bytes memory _blob = _store.getRecord(_tableId, _keyTuple, getSchema());
@@ -249,8 +471,14 @@ library MapConfig {
   }
 
   /** Set the full data using individual values */
-  function set(uint32 width, uint32 height, bytes memory terrain) internal {
-    bytes memory _data = encode(width, height, terrain);
+  function set(
+    uint32 width,
+    uint32 height,
+    bytes memory terrain,
+    uint8[72] memory pathx,
+    uint8[72] memory pathy
+  ) internal {
+    bytes memory _data = encode(width, height, terrain, pathx, pathy);
 
     bytes32[] memory _keyTuple = new bytes32[](0);
 
@@ -258,8 +486,15 @@ library MapConfig {
   }
 
   /** Set the full data using individual values (using the specified store) */
-  function set(IStore _store, uint32 width, uint32 height, bytes memory terrain) internal {
-    bytes memory _data = encode(width, height, terrain);
+  function set(
+    IStore _store,
+    uint32 width,
+    uint32 height,
+    bytes memory terrain,
+    uint8[72] memory pathx,
+    uint8[72] memory pathy
+  ) internal {
+    bytes memory _data = encode(width, height, terrain, pathx, pathy);
 
     bytes32[] memory _keyTuple = new bytes32[](0);
 
@@ -267,7 +502,13 @@ library MapConfig {
   }
 
   /** Decode the tightly packed blob using this table's schema */
-  function decode(bytes memory _blob) internal view returns (uint32 width, uint32 height, bytes memory terrain) {
+  function decode(
+    bytes memory _blob
+  )
+    internal
+    view
+    returns (uint32 width, uint32 height, bytes memory terrain, uint8[72] memory pathx, uint8[72] memory pathy)
+  {
     // 8 is the total byte length of static data
     PackedCounter _encodedLengths = PackedCounter.wrap(Bytes.slice32(_blob, 8));
 
@@ -284,16 +525,40 @@ library MapConfig {
       _start = _end;
       _end += _encodedLengths.atIndex(0);
       terrain = (bytes(SliceLib.getSubslice(_blob, _start, _end).toBytes()));
+
+      _start = _end;
+      _end += _encodedLengths.atIndex(1);
+      pathx = toStaticArray_uint8_72(SliceLib.getSubslice(_blob, _start, _end).decodeArray_uint8());
+
+      _start = _end;
+      _end += _encodedLengths.atIndex(2);
+      pathy = toStaticArray_uint8_72(SliceLib.getSubslice(_blob, _start, _end).decodeArray_uint8());
     }
   }
 
   /** Tightly pack full data using this table's schema */
-  function encode(uint32 width, uint32 height, bytes memory terrain) internal view returns (bytes memory) {
-    uint40[] memory _counters = new uint40[](1);
+  function encode(
+    uint32 width,
+    uint32 height,
+    bytes memory terrain,
+    uint8[72] memory pathx,
+    uint8[72] memory pathy
+  ) internal view returns (bytes memory) {
+    uint40[] memory _counters = new uint40[](3);
     _counters[0] = uint40(bytes(terrain).length);
+    _counters[1] = uint40(pathx.length * 1);
+    _counters[2] = uint40(pathy.length * 1);
     PackedCounter _encodedLengths = PackedCounterLib.pack(_counters);
 
-    return abi.encodePacked(width, height, _encodedLengths.unwrap(), bytes((terrain)));
+    return
+      abi.encodePacked(
+        width,
+        height,
+        _encodedLengths.unwrap(),
+        bytes((terrain)),
+        EncodeArray.encode(fromStaticArray_uint8_72(pathx)),
+        EncodeArray.encode(fromStaticArray_uint8_72(pathy))
+      );
   }
 
   /** Encode keys as a bytes32 array using this table's schema */
@@ -314,4 +579,22 @@ library MapConfig {
 
     _store.deleteRecord(_tableId, _keyTuple);
   }
+}
+
+function toStaticArray_uint8_72(uint8[] memory _value) pure returns (uint8[72] memory _result) {
+  // in memory static arrays are just dynamic arrays without the length byte
+  assembly {
+    _result := add(_value, 0x20)
+  }
+}
+
+function fromStaticArray_uint8_72(uint8[72] memory _value) view returns (uint8[] memory _result) {
+  _result = new uint8[](72);
+  uint256 fromPointer;
+  uint256 toPointer;
+  assembly {
+    fromPointer := _value
+    toPointer := add(_result, 0x20)
+  }
+  Memory.copy(fromPointer, toPointer, 2304);
 }
