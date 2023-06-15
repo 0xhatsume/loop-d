@@ -20,27 +20,25 @@ contract PostDeploy is Script {
     TerrainType T = TerrainType.TallGrass;
     TerrainType B = TerrainType.Boulder;
 
-    TerrainType[20][20] memory map = [
-      [O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O], //0
-      [O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O], //1
-      [O, O, T, T, T, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O], //2
-      [O, O, T, O, T, O, O, O, O, O, T, T, T, O, O, O, O, O, O, O], //3
-      [O, O, T, O, T, T, T, T, T, T, T, O, T, T, T, T, T, T, O, O], //4
-      [O, O, T, O, O, O, O, O, O, O, O, O, O, O, O, O, O, T, O, O], //5
-      [O, O, T, T, T, O, O, O, O, O, O, O, O, O, O, O, T, T, O, O], //6
-      [O, O, O, O, T, O, O, O, O, O, O, O, O, O, O, O, T, O, O, O], //7
-      [O, O, T, T, T, O, O, O, O, O, O, O, O, O, O, O, T, O, O, O], //8
-      [O, O, T, O, O, O, O, O, O, O, O, O, O, O, O, O, T, T, O, O], //9
-      [O, O, T, O, O, O, O, O, O, O, O, O, O, O, O, O, O, T, O, O], //10
-      [O, O, T, O, O, O, O, O, O, O, O, O, O, O, O, O, O, T, O, O], //11
-      [O, O, T, O, O, O, O, O, O, O, O, O, O, O, O, O, O, T, O, O], //12
-      [O, O, T, T, O, O, O, T, T, T, T, O, O, O, O, O, O, T, O, O], //13
-      [O, O, O, T, O, O, O, T, O, O, T, O, O, O, T, T, T, T, O, O], //14
-      [O, O, O, T, O, O, O, T, O, O, T, T, T, T, T, O, O, O, O, O], //15
-      [O, O, O, T, T, T, T, T, O, O, O, O, O, O, O, O, O, O, O, O], //16
-      [O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O], //17
-      [O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O], //18
-      [O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O] //19
+    TerrainType[18][18] memory map = [
+      [O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O], //0
+      [O, O, T, T, T, O, O, O, O, O, O, O, O, O, O, O, O, O], //1
+      [O, T, T, O, T, O, O, O, O, O, O, O, O, O, O, O, O, O], //2
+      [O, T, O, O, T, O, O, O, O, T, T, T, O, O, O, O, O, O], //3
+      [O, T, O, O, T, T, T, T, T, T, O, T, T, T, T, T, T, O], //4
+      [O, T, O, O, O, O, O, O, O, O, O, O, O, O, O, O, T, O], //5
+      [O, T, T, T, O, O, O, O, O, O, O, O, O, O, O, T, T, O], //6
+      [O, O, O, T, O, O, O, O, O, O, O, O, O, O, O, T, O, O], //7
+      [O, T, T, T, O, O, O, O, O, O, O, O, O, O, O, T, O, O], //8
+      [O, T, O, O, O, O, O, O, O, O, O, O, O, O, O, T, T, O], //9
+      [O, T, O, O, O, O, O, O, O, O, O, O, O, O, O, O, T, O], //10
+      [O, T, O, O, O, O, O, O, O, O, O, O, O, O, O, O, T, O], //11
+      [O, T, O, O, O, O, O, O, O, O, O, O, O, O, O, O, T, O], //12
+      [O, T, T, O, O, O, T, T, T, T, O, O, O, O, O, O, T, O], //13
+      [O, O, T, O, O, O, T, O, O, T, O, O, O, T, T, T, T, O], //14
+      [O, O, T, O, O, O, T, O, O, T, T, T, T, T, O, O, O, O], //15
+      [O, O, T, T, T, T, T, O, O, O, O, O, O, O, O, O, O, O], //16
+      [O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O] //17
     ];
 
     uint32 height = uint32(map.length);
