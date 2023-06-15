@@ -27,10 +27,27 @@ export const ItemPanel = () => {
         </div>
 
         {/* status bars */}
-        <div className="h-10 border border-black
-            mx-4
-        ">
+        <div className="h-10 
             
+            mx-4 p-2
+        ">
+            <div className='flex 
+            bg-black font-protoshade 
+            shadow-inner shadow-gray-600
+            font-semibold rounded-sm overflow-hidden'>
+                <span className="bg-[#9DBA51] w-[90%] 
+                text-xs text-[#E8DEDA] h-2">
+                    912/1200
+                </span>
+            </div>
+            <div className="my-1"></div>
+            <div className='flex 
+            bg-black font-protoshade 
+            shadow-inner shadow-gray-600
+            font-semibold rounded-sm overflow-hidden'>
+                <span className="bg-[#B69553] w-[90%] 
+                text-xs text-[#E8DEDA] h-2"></span>
+            </div>
 
         </div>
 
