@@ -21,6 +21,7 @@ contract PostDeploy is Script {
     TerrainType B = TerrainType.Boulder;
 
     TerrainType[18][18] memory map = [
+      //, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7
       [O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O], //0
       [O, O, T, T, T, O, O, O, O, O, O, O, O, O, O, O, O, O], //1
       [O, T, T, O, T, O, O, O, O, O, O, O, O, O, O, O, O, O], //2
@@ -39,6 +40,20 @@ contract PostDeploy is Script {
       [O, O, T, O, O, O, T, O, O, T, T, T, T, T, O, O, O, O], //15
       [O, O, T, T, T, T, T, O, O, O, O, O, O, O, O, O, O, O], //16
       [O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O, O] //17
+      //, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6, 7
+    ];
+
+    uint8[72] memory pathX = [
+      2,3,4,5,6,6,6,6,7,8,9,9,9,10,11,12,13,13,14,15,16,
+      16,16,16,16,16,15,15,15,15,16,16,16,15,14,13,12,11,
+      11,10,9,9, 8, 7, 6, 5, 4, 4, 4, 4, 3, 2, 2, 1, 
+      1, 1, 1, 1,2, 3, 3, 3, 2, 1, 1,1,1,1,1,2,2,2
+    ];
+    uint8[72] memory pathY = [
+      2,3,4,5,6,6,6,6,7,8,9,9,9,10,11,12,13,13,14,15,16,
+      16,16,16,16,16,15,15,15,15,16,16,16,15,14,13,12,11,
+      11,10,9,9, 8, 7, 6, 5, 4, 4, 4, 4, 3, 2, 2, 1, 
+      1, 1, 1, 1,2, 3, 3, 3, 2, 1, 1,1,1,1,1,2,2,2
     ];
 
     uint32 height = uint32(map.length);
@@ -63,7 +78,7 @@ contract PostDeploy is Script {
       }
     }
 
-    MapConfig.set(world, width, height, terrain);
+    MapConfig.set(world, width, height, terrain,pathX,pathY);
 
     vm.stopBroadcast();
   }

@@ -60,6 +60,8 @@ export function defineContractComponents(world: World) {
           width: RecsType.Number,
           height: RecsType.Number,
           terrain: RecsType.String,
+          pathx: RecsType.NumberArray,
+          pathy: RecsType.NumberArray,
         },
         {
           metadata: {

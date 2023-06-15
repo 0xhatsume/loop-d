@@ -58,7 +58,8 @@ export const GameMap = ({
           const mainPlayerHere = playersHere?.find(
             (p) => p.entity === playerEntity
           );
-
+          
+          // terrainEmoji === "tree" ? console.log(`(${x},${y})`) : null;
           return (
             <div
               key={`${x},${y}`}

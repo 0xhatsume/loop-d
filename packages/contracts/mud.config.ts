@@ -26,6 +26,8 @@ export default mudConfig({
         width: "uint32",
         height: "uint32",
         terrain: "bytes",
+        pathx: "uint8[72]",
+        pathy: "uint8[72]"
       },
     },
     MonsterCatchAttempt: {

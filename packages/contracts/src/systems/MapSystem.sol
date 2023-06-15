@@ -12,7 +12,7 @@ contract MapSystem is System {
     require(!Player.get(player), "already spawned");
 
     // Constrain position to map size, wrapping around if necessary
-    (uint32 width, uint32 height, ) = MapConfig.get();
+    (uint32 width, uint32 height,, ,) = MapConfig.get();
     x = (x + width) % width;
     y = (y + height) % height;
 
@@ -35,7 +35,7 @@ contract MapSystem is System {
     require(distance(fromX, fromY, x, y) == 1, "can only move to adjacent spaces");
 
     // Constrain position to map size, wrapping around if necessary
-    (uint32 width, uint32 height, ) = MapConfig.get();
+    (uint32 width, uint32 height,,,) = MapConfig.get();
     x = (x + width) % width;
     y = (y + height) % height;
 
