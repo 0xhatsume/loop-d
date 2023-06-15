@@ -11,7 +11,9 @@ import { MonsterCatchAttempt, MonsterCatchAttemptTableId } from "./tables/Monste
 import { Pause, PauseTableId } from "./tables/Pause.sol";
 import { LastPause, LastPauseTableId } from "./tables/LastPause.sol";
 import { AutoFight, AutoFightTableId } from "./tables/AutoFight.sol";
-import { Home, HomeData, HomeTableId } from "./tables/Home.sol";
+import { BlockPerMove, BlockPerMoveTableId } from "./tables/BlockPerMove.sol";
+import { GameStart, GameStartTableId } from "./tables/GameStart.sol";
+import { Home, HomeTableId } from "./tables/Home.sol";
 import { Monster, MonsterTableId } from "./tables/Monster.sol";
 import { Movable, MovableTableId } from "./tables/Movable.sol";
 import { Obstruction, ObstructionTableId } from "./tables/Obstruction.sol";

@@ -3,8 +3,10 @@ import { mudConfig } from "@latticexyz/world/register";
 export default mudConfig({
   enums: {
     MonsterCatchResult: ["Missed", "Caught", "Fled"],
-    MonsterType: ["None", "Eagle", "Rat", "Caterpillar"],
-    TerrainType: ["None", "TallGrass", "Boulder"],
+    MonsterType: ["None", "Eagle", "Rat", "Caterpillar",
+      "Skeleton", "Rogue", "Vampire"
+    ],
+    TerrainType: ["None", "TallGrass", "Boulder", "Path"],
   },
   tables: {
     Encounter: {
@@ -43,12 +45,22 @@ export default mudConfig({
 
 
     Pause: "bool",
-    LastPause: "uint256",
-    AutoFight: "bool",
-    Home: {
+    LastPause: {
+      dataStruct: false,
       schema: {
-        x: "uint32",
-        y: "uint32",
+        timestamp: "uint256",
+        pathIndex: "uint8"
+      },
+    },
+    AutoFight: "bool",
+    BlockPerMove: "uint32",
+    GameStart: "bool",
+    Home: {
+      dataStruct: false,
+      schema: {
+        index: "uint8",
+        x: "uint8",
+        y: "uint8",
       }
     },
 

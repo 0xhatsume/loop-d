@@ -20,17 +20,13 @@ import { PackedCounter, PackedCounterLib } from "@latticexyz/store/src/PackedCou
 bytes32 constant _tableId = bytes32(abi.encodePacked(bytes16(""), bytes16("Home")));
 bytes32 constant HomeTableId = _tableId;
 
-struct HomeData {
-  uint32 x;
-  uint32 y;
-}
-
 library Home {
   /** Get the table's schema */
   function getSchema() internal pure returns (Schema) {
-    SchemaType[] memory _schema = new SchemaType[](2);
-    _schema[0] = SchemaType.UINT32;
-    _schema[1] = SchemaType.UINT32;
+    SchemaType[] memory _schema = new SchemaType[](3);
+    _schema[0] = SchemaType.UINT8;
+    _schema[1] = SchemaType.UINT8;
+    _schema[2] = SchemaType.UINT8;
 
     return SchemaLib.encode(_schema);
   }
@@ -44,9 +40,10 @@ library Home {
 
   /** Get the table's metadata */
   function getMetadata() internal pure returns (string memory, string[] memory) {
-    string[] memory _fieldNames = new string[](2);
-    _fieldNames[0] = "x";
-    _fieldNames[1] = "y";
+    string[] memory _fieldNames = new string[](3);
+    _fieldNames[0] = "index";
+    _fieldNames[1] = "x";
+    _fieldNames[2] = "y";
     return ("Home", _fieldNames);
   }
 
@@ -72,76 +69,110 @@ library Home {
     _store.setMetadata(_tableId, _tableName, _fieldNames);
   }
 
-  /** Get x */
-  function getX(bytes32 key) internal view returns (uint32 x) {
+  /** Get index */
+  function getIndex(bytes32 key) internal view returns (uint8 index) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
     bytes memory _blob = StoreSwitch.getField(_tableId, _keyTuple, 0);
-    return (uint32(Bytes.slice4(_blob, 0)));
+    return (uint8(Bytes.slice1(_blob, 0)));
   }
 
-  /** Get x (using the specified store) */
-  function getX(IStore _store, bytes32 key) internal view returns (uint32 x) {
+  /** Get index (using the specified store) */
+  function getIndex(IStore _store, bytes32 key) internal view returns (uint8 index) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
     bytes memory _blob = _store.getField(_tableId, _keyTuple, 0);
-    return (uint32(Bytes.slice4(_blob, 0)));
+    return (uint8(Bytes.slice1(_blob, 0)));
   }
 
-  /** Set x */
-  function setX(bytes32 key, uint32 x) internal {
+  /** Set index */
+  function setIndex(bytes32 key, uint8 index) internal {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
-    StoreSwitch.setField(_tableId, _keyTuple, 0, abi.encodePacked((x)));
+    StoreSwitch.setField(_tableId, _keyTuple, 0, abi.encodePacked((index)));
   }
 
-  /** Set x (using the specified store) */
-  function setX(IStore _store, bytes32 key, uint32 x) internal {
+  /** Set index (using the specified store) */
+  function setIndex(IStore _store, bytes32 key, uint8 index) internal {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
-    _store.setField(_tableId, _keyTuple, 0, abi.encodePacked((x)));
+    _store.setField(_tableId, _keyTuple, 0, abi.encodePacked((index)));
   }
 
-  /** Get y */
-  function getY(bytes32 key) internal view returns (uint32 y) {
+  /** Get x */
+  function getX(bytes32 key) internal view returns (uint8 x) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
     bytes memory _blob = StoreSwitch.getField(_tableId, _keyTuple, 1);
-    return (uint32(Bytes.slice4(_blob, 0)));
+    return (uint8(Bytes.slice1(_blob, 0)));
   }
 
-  /** Get y (using the specified store) */
-  function getY(IStore _store, bytes32 key) internal view returns (uint32 y) {
+  /** Get x (using the specified store) */
+  function getX(IStore _store, bytes32 key) internal view returns (uint8 x) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
     bytes memory _blob = _store.getField(_tableId, _keyTuple, 1);
-    return (uint32(Bytes.slice4(_blob, 0)));
+    return (uint8(Bytes.slice1(_blob, 0)));
+  }
+
+  /** Set x */
+  function setX(bytes32 key, uint8 x) internal {
+    bytes32[] memory _keyTuple = new bytes32[](1);
+    _keyTuple[0] = bytes32((key));
+
+    StoreSwitch.setField(_tableId, _keyTuple, 1, abi.encodePacked((x)));
+  }
+
+  /** Set x (using the specified store) */
+  function setX(IStore _store, bytes32 key, uint8 x) internal {
+    bytes32[] memory _keyTuple = new bytes32[](1);
+    _keyTuple[0] = bytes32((key));
+
+    _store.setField(_tableId, _keyTuple, 1, abi.encodePacked((x)));
+  }
+
+  /** Get y */
+  function getY(bytes32 key) internal view returns (uint8 y) {
+    bytes32[] memory _keyTuple = new bytes32[](1);
+    _keyTuple[0] = bytes32((key));
+
+    bytes memory _blob = StoreSwitch.getField(_tableId, _keyTuple, 2);
+    return (uint8(Bytes.slice1(_blob, 0)));
+  }
+
+  /** Get y (using the specified store) */
+  function getY(IStore _store, bytes32 key) internal view returns (uint8 y) {
+    bytes32[] memory _keyTuple = new bytes32[](1);
+    _keyTuple[0] = bytes32((key));
+
+    bytes memory _blob = _store.getField(_tableId, _keyTuple, 2);
+    return (uint8(Bytes.slice1(_blob, 0)));
   }
 
   /** Set y */
-  function setY(bytes32 key, uint32 y) internal {
+  function setY(bytes32 key, uint8 y) internal {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
-    StoreSwitch.setField(_tableId, _keyTuple, 1, abi.encodePacked((y)));
+    StoreSwitch.setField(_tableId, _keyTuple, 2, abi.encodePacked((y)));
   }
 
   /** Set y (using the specified store) */
-  function setY(IStore _store, bytes32 key, uint32 y) internal {
+  function setY(IStore _store, bytes32 key, uint8 y) internal {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
-    _store.setField(_tableId, _keyTuple, 1, abi.encodePacked((y)));
+    _store.setField(_tableId, _keyTuple, 2, abi.encodePacked((y)));
   }
 
   /** Get the full data */
-  function get(bytes32 key) internal view returns (HomeData memory _table) {
+  function get(bytes32 key) internal view returns (uint8 index, uint8 x, uint8 y) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
@@ -150,7 +181,7 @@ library Home {
   }
 
   /** Get the full data (using the specified store) */
-  function get(IStore _store, bytes32 key) internal view returns (HomeData memory _table) {
+  function get(IStore _store, bytes32 key) internal view returns (uint8 index, uint8 x, uint8 y) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
@@ -159,8 +190,8 @@ library Home {
   }
 
   /** Set the full data using individual values */
-  function set(bytes32 key, uint32 x, uint32 y) internal {
-    bytes memory _data = encode(x, y);
+  function set(bytes32 key, uint8 index, uint8 x, uint8 y) internal {
+    bytes memory _data = encode(index, x, y);
 
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
@@ -169,8 +200,8 @@ library Home {
   }
 
   /** Set the full data using individual values (using the specified store) */
-  function set(IStore _store, bytes32 key, uint32 x, uint32 y) internal {
-    bytes memory _data = encode(x, y);
+  function set(IStore _store, bytes32 key, uint8 index, uint8 x, uint8 y) internal {
+    bytes memory _data = encode(index, x, y);
 
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
@@ -178,26 +209,18 @@ library Home {
     _store.setRecord(_tableId, _keyTuple, _data);
   }
 
-  /** Set the full data using the data struct */
-  function set(bytes32 key, HomeData memory _table) internal {
-    set(key, _table.x, _table.y);
-  }
-
-  /** Set the full data using the data struct (using the specified store) */
-  function set(IStore _store, bytes32 key, HomeData memory _table) internal {
-    set(_store, key, _table.x, _table.y);
-  }
-
   /** Decode the tightly packed blob using this table's schema */
-  function decode(bytes memory _blob) internal pure returns (HomeData memory _table) {
-    _table.x = (uint32(Bytes.slice4(_blob, 0)));
+  function decode(bytes memory _blob) internal pure returns (uint8 index, uint8 x, uint8 y) {
+    index = (uint8(Bytes.slice1(_blob, 0)));
 
-    _table.y = (uint32(Bytes.slice4(_blob, 4)));
+    x = (uint8(Bytes.slice1(_blob, 1)));
+
+    y = (uint8(Bytes.slice1(_blob, 2)));
   }
 
   /** Tightly pack full data using this table's schema */
-  function encode(uint32 x, uint32 y) internal view returns (bytes memory) {
-    return abi.encodePacked(x, y);
+  function encode(uint8 index, uint8 x, uint8 y) internal view returns (bytes memory) {
+    return abi.encodePacked(index, x, y);
   }
 
   /** Encode keys as a bytes32 array using this table's schema */

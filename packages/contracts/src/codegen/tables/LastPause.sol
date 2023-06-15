@@ -23,8 +23,9 @@ bytes32 constant LastPauseTableId = _tableId;
 library LastPause {
   /** Get the table's schema */
   function getSchema() internal pure returns (Schema) {
-    SchemaType[] memory _schema = new SchemaType[](1);
+    SchemaType[] memory _schema = new SchemaType[](2);
     _schema[0] = SchemaType.UINT256;
+    _schema[1] = SchemaType.UINT8;
 
     return SchemaLib.encode(_schema);
   }
@@ -38,8 +39,9 @@ library LastPause {
 
   /** Get the table's metadata */
   function getMetadata() internal pure returns (string memory, string[] memory) {
-    string[] memory _fieldNames = new string[](1);
-    _fieldNames[0] = "value";
+    string[] memory _fieldNames = new string[](2);
+    _fieldNames[0] = "timestamp";
+    _fieldNames[1] = "pathIndex";
     return ("LastPause", _fieldNames);
   }
 
@@ -65,8 +67,8 @@ library LastPause {
     _store.setMetadata(_tableId, _tableName, _fieldNames);
   }
 
-  /** Get value */
-  function get(bytes32 key) internal view returns (uint256 value) {
+  /** Get timestamp */
+  function getTimestamp(bytes32 key) internal view returns (uint256 timestamp) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
@@ -74,8 +76,8 @@ library LastPause {
     return (uint256(Bytes.slice32(_blob, 0)));
   }
 
-  /** Get value (using the specified store) */
-  function get(IStore _store, bytes32 key) internal view returns (uint256 value) {
+  /** Get timestamp (using the specified store) */
+  function getTimestamp(IStore _store, bytes32 key) internal view returns (uint256 timestamp) {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
@@ -83,25 +85,104 @@ library LastPause {
     return (uint256(Bytes.slice32(_blob, 0)));
   }
 
-  /** Set value */
-  function set(bytes32 key, uint256 value) internal {
+  /** Set timestamp */
+  function setTimestamp(bytes32 key, uint256 timestamp) internal {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
-    StoreSwitch.setField(_tableId, _keyTuple, 0, abi.encodePacked((value)));
+    StoreSwitch.setField(_tableId, _keyTuple, 0, abi.encodePacked((timestamp)));
   }
 
-  /** Set value (using the specified store) */
-  function set(IStore _store, bytes32 key, uint256 value) internal {
+  /** Set timestamp (using the specified store) */
+  function setTimestamp(IStore _store, bytes32 key, uint256 timestamp) internal {
     bytes32[] memory _keyTuple = new bytes32[](1);
     _keyTuple[0] = bytes32((key));
 
-    _store.setField(_tableId, _keyTuple, 0, abi.encodePacked((value)));
+    _store.setField(_tableId, _keyTuple, 0, abi.encodePacked((timestamp)));
+  }
+
+  /** Get pathIndex */
+  function getPathIndex(bytes32 key) internal view returns (uint8 pathIndex) {
+    bytes32[] memory _keyTuple = new bytes32[](1);
+    _keyTuple[0] = bytes32((key));
+
+    bytes memory _blob = StoreSwitch.getField(_tableId, _keyTuple, 1);
+    return (uint8(Bytes.slice1(_blob, 0)));
+  }
+
+  /** Get pathIndex (using the specified store) */
+  function getPathIndex(IStore _store, bytes32 key) internal view returns (uint8 pathIndex) {
+    bytes32[] memory _keyTuple = new bytes32[](1);
+    _keyTuple[0] = bytes32((key));
+
+    bytes memory _blob = _store.getField(_tableId, _keyTuple, 1);
+    return (uint8(Bytes.slice1(_blob, 0)));
+  }
+
+  /** Set pathIndex */
+  function setPathIndex(bytes32 key, uint8 pathIndex) internal {
+    bytes32[] memory _keyTuple = new bytes32[](1);
+    _keyTuple[0] = bytes32((key));
+
+    StoreSwitch.setField(_tableId, _keyTuple, 1, abi.encodePacked((pathIndex)));
+  }
+
+  /** Set pathIndex (using the specified store) */
+  function setPathIndex(IStore _store, bytes32 key, uint8 pathIndex) internal {
+    bytes32[] memory _keyTuple = new bytes32[](1);
+    _keyTuple[0] = bytes32((key));
+
+    _store.setField(_tableId, _keyTuple, 1, abi.encodePacked((pathIndex)));
+  }
+
+  /** Get the full data */
+  function get(bytes32 key) internal view returns (uint256 timestamp, uint8 pathIndex) {
+    bytes32[] memory _keyTuple = new bytes32[](1);
+    _keyTuple[0] = bytes32((key));
+
+    bytes memory _blob = StoreSwitch.getRecord(_tableId, _keyTuple, getSchema());
+    return decode(_blob);
+  }
+
+  /** Get the full data (using the specified store) */
+  function get(IStore _store, bytes32 key) internal view returns (uint256 timestamp, uint8 pathIndex) {
+    bytes32[] memory _keyTuple = new bytes32[](1);
+    _keyTuple[0] = bytes32((key));
+
+    bytes memory _blob = _store.getRecord(_tableId, _keyTuple, getSchema());
+    return decode(_blob);
+  }
+
+  /** Set the full data using individual values */
+  function set(bytes32 key, uint256 timestamp, uint8 pathIndex) internal {
+    bytes memory _data = encode(timestamp, pathIndex);
+
+    bytes32[] memory _keyTuple = new bytes32[](1);
+    _keyTuple[0] = bytes32((key));
+
+    StoreSwitch.setRecord(_tableId, _keyTuple, _data);
+  }
+
+  /** Set the full data using individual values (using the specified store) */
+  function set(IStore _store, bytes32 key, uint256 timestamp, uint8 pathIndex) internal {
+    bytes memory _data = encode(timestamp, pathIndex);
+
+    bytes32[] memory _keyTuple = new bytes32[](1);
+    _keyTuple[0] = bytes32((key));
+
+    _store.setRecord(_tableId, _keyTuple, _data);
+  }
+
+  /** Decode the tightly packed blob using this table's schema */
+  function decode(bytes memory _blob) internal pure returns (uint256 timestamp, uint8 pathIndex) {
+    timestamp = (uint256(Bytes.slice32(_blob, 0)));
+
+    pathIndex = (uint8(Bytes.slice1(_blob, 32)));
   }
 
   /** Tightly pack full data using this table's schema */
-  function encode(uint256 value) internal view returns (bytes memory) {
-    return abi.encodePacked(value);
+  function encode(uint256 timestamp, uint8 pathIndex) internal view returns (bytes memory) {
+    return abi.encodePacked(timestamp, pathIndex);
   }
 
   /** Encode keys as a bytes32 array using this table's schema */

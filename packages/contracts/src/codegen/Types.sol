@@ -12,11 +12,15 @@ enum MonsterType {
   None,
   Eagle,
   Rat,
-  Caterpillar
+  Caterpillar,
+  Skeleton,
+  Rogue,
+  Vampire
 }
 
 enum TerrainType {
   None,
   TallGrass,
-  Boulder
+  Boulder,
+  Path
 }

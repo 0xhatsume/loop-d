@@ -106,7 +106,8 @@ export function defineContractComponents(world: World) {
       return defineComponent(
         world,
         {
-          value: RecsType.BigInt,
+          timestamp: RecsType.BigInt,
+          pathIndex: RecsType.Number,
         },
         {
           metadata: {
@@ -131,11 +132,42 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
+    BlockPerMove: (() => {
+      const tableId = new TableId("", "BlockPerMove");
+      return defineComponent(
+        world,
+        {
+          value: RecsType.Number,
+        },
+        {
+          metadata: {
+            contractId: tableId.toHexString(),
+            tableId: tableId.toString(),
+          },
+        }
+      );
+    })(),
+    GameStart: (() => {
+      const tableId = new TableId("", "GameStart");
+      return defineComponent(
+        world,
+        {
+          value: RecsType.Boolean,
+        },
+        {
+          metadata: {
+            contractId: tableId.toHexString(),
+            tableId: tableId.toString(),
+          },
+        }
+      );
+    })(),
     Home: (() => {
       const tableId = new TableId("", "Home");
       return defineComponent(
         world,
         {
+          index: RecsType.Number,
           x: RecsType.Number,
           y: RecsType.Number,
         },

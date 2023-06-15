@@ -7,4 +7,12 @@ interface IMapSystem {
   function spawn(uint32 x, uint32 y) external;
 
   function move(uint32 x, uint32 y) external;
+
+  function setHome(address world, uint8 index, uint8 x, uint8 y) external;
+
+  function startGame() external;
+
+  function setBlocksPerMove(uint32 blocksPerMove) external;
+
+  function playerPosition(address player) external view;
 }
