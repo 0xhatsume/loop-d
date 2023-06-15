@@ -38,6 +38,19 @@ export default mudConfig({
         result: "MonsterCatchResult",
       },
     },
+
+
+    Pause: "bool",
+    LastPause: "uint256",
+    AutoFight: "bool",
+    Home: {
+      schema: {
+        x: "uint32",
+        y: "uint32",
+      }
+    },
+
+
     Monster: "MonsterType",
     Movable: "bool",
     Obstruction: "bool",
