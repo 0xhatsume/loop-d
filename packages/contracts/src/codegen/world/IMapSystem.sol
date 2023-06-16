@@ -14,5 +14,5 @@ interface IMapSystem {
 
   function setBlocksPerMove(uint32 blocksPerMove) external;
 
-  function playerPosition(address player) external view;
+  function playerPosition(address player) external view returns (uint8, uint8, uint8);
 }

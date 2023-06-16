@@ -2,7 +2,7 @@
 pragma solidity >=0.8.0;
 import { System } from "@latticexyz/world/src/System.sol";
 import { Encounter, EncounterData, Encounterable, EncounterTrigger, 
-    Home, BlockPerMove, GameStart, LastPause, Pause, AutoFight,
+    Home, BlockPerMove, GameStart, GameStartTime, LastPause, Pause, AutoFight,
     MapConfig, Monster, Movable, Obstruction, Player, Position } from "../codegen/Tables.sol";
 import { MonsterType } from "../codegen/Types.sol";
 import { addressToEntityKey } from "../addressToEntityKey.sol";
@@ -85,21 +85,44 @@ contract MapSystem is System {
     Pause.set(player, false);
     AutoFight.set(player, true);
 
+    GameStartTime.set(player, block.timestamp);
     GameStart.set(player, true);
   }
 
   function setBlocksPerMove(uint32 blocksPerMove) public {
     bytes32 player = addressToEntityKey(address(_msgSender()));
+
+    
+    require(GameStart.get(player), "game not started");
+
+    // set last pause to current block number
+    // get player current pathIndex
+    //uint8 pathIndex = Position.get(player).pathIndex;
+    (,, uint8 pathIndex) = this.playerPosition(address(_msgSender()));
+    LastPause.set(player, block.number, pathIndex);
     BlockPerMove.set(player, blocksPerMove);
   }
 
   // View functions
-  function playerPosition(address player) view public {
+  function playerPosition(address player) view public returns (uint8, uint8, uint8){
     bytes32 _player = addressToEntityKey(address(player));
-    Position.get(_player);
+    //Position.get(_player);
+    require(GameStart.get(_player), "game has not started");
 
     // if not paused, plain player position is based on 
     //  ((current block number - LastPause) / BlocksPerMove) + LastPosition
+    uint8 lastPathIndex = 0;
+    if (GameStartTime.get(_player)-block.timestamp > 0) {
+      (, lastPathIndex) = LastPause.get(_player);
+    } else {
+      lastPathIndex = 0;
+    }
+
+    (uint256 lastTimePaused,) = LastPause.get(_player);
+    uint8 newPathIndex = uint8((((block.number - lastTimePaused)/BlockPerMove.get(_player)) + 
+                          lastPathIndex) % 72);
+    (,,, uint8[72] memory x, uint8[72] memory y) = MapConfig.get();
+    return (x[lastPathIndex], y[lastPathIndex], newPathIndex);
   }
 
 }

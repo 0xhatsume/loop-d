@@ -13,6 +13,7 @@ import { LastPause, LastPauseTableId } from "./tables/LastPause.sol";
 import { AutoFight, AutoFightTableId } from "./tables/AutoFight.sol";
 import { BlockPerMove, BlockPerMoveTableId } from "./tables/BlockPerMove.sol";
 import { GameStart, GameStartTableId } from "./tables/GameStart.sol";
+import { GameStartTime, GameStartTimeTableId } from "./tables/GameStartTime.sol";
 import { Home, HomeTableId } from "./tables/Home.sol";
 import { Monster, MonsterTableId } from "./tables/Monster.sol";
 import { Movable, MovableTableId } from "./tables/Movable.sol";

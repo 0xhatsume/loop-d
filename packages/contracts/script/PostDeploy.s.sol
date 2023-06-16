@@ -4,7 +4,10 @@ pragma solidity >=0.8.0;
 import { Script } from "forge-std/Script.sol";
 import { console } from "forge-std/console.sol";
 import { IWorld } from "../src/codegen/world/IWorld.sol";
-import { EncounterTrigger, MapConfig, Obstruction, Position } from "../src/codegen/Tables.sol";
+import { EncounterTrigger, MapConfig, Obstruction, Position,
+  Home } from "../src/codegen/Tables.sol";
+import {MapSystem} from "../src/systems/MapSystem.sol";
+import { addressToEntityKey } from "../src/addressToEntityKey.sol";
 import { TerrainType } from "../src/codegen/Types.sol";
 import { positionToEntityKey } from "../src/positionToEntityKey.sol";
 
@@ -71,8 +74,11 @@ contract PostDeploy is Script {
       );
     
     uint8 homePosition = uint8(rand % 72);
-
     console.log("Home Position of ", homePosition, pathX[homePosition], pathY[homePosition]);
+    // set home position
+    // bytes32 _world = addressToEntityKey(worldAddress);
+    // Home.set(_world, homePosition, pathX[homePosition], pathY[homePosition]);
+    //MapSystem.setHome(world, homePosition, pathX[homePosition], pathY[homePosition]);
 
     uint32 height = uint32(map.length);
     uint32 width = uint32(map[0].length);

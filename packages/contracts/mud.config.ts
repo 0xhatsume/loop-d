@@ -55,6 +55,7 @@ export default mudConfig({
     AutoFight: "bool",
     BlockPerMove: "uint32",
     GameStart: "bool",
+    GameStartTime: "uint256",
     Home: {
       dataStruct: false,
       schema: {
