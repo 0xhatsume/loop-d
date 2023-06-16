@@ -32,6 +32,10 @@ export function createSystemCalls(
     return runQuery([Has(Obstruction), HasValue(Position, { x, y })]).size > 0;
   };
 
+  const startGame = async () => {
+
+  };
+
   const moveTo = async (inputX: number, inputY: number) => {
     if (!playerEntity) {
       throw new Error("no player");

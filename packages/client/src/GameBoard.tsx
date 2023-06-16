@@ -1,7 +1,7 @@
 import { useComponentValue, useEntityQuery } from "@latticexyz/react";
 import { GameMap } from "./GameMap";
 import { useMUD } from "./MUDContext";
-import { useKeyboardMovement } from "./useKeyboardMovement";
+//import { useKeyboardMovement } from "./useKeyboardMovement";
 import { hexToArray } from "@latticexyz/utils";
 import { TerrainType, terrainTypes } from "./terrainTypes";
 import { EncounterScreen } from "./EncounterScreen";
@@ -9,7 +9,7 @@ import { Entity, Has, getComponentValueStrict } from "@latticexyz/recs";
 import { MonsterType, monsterTypes } from "./monsterTypes";
 
 export const GameBoard = () => {
-  useKeyboardMovement();
+  //useKeyboardMovement();
 
   const {
     components: { Encounter, MapConfig, Monster, Player, Position },
