@@ -20,5 +20,5 @@ setup().then((result) => {
       <ToastContainer position="bottom-right" draggable={false} theme="dark" />
     </MUDProvider>
   );
-  mountDevTools();
+  //mountDevTools();
 });
