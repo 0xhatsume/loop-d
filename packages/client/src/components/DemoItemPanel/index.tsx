@@ -102,10 +102,10 @@ export const DemoItemPanel = () => {
             
             <input
             type="text"
-            className="bg-white/10 focus:bg-white/30 placeholder:text-[#5F5453]/50 border border-[#5F5453]/50 focus:border-[#5F5453] rounded-md w-full px-2 py-1.5 focus:outline-none border"
+            className="bg-white/10 focus:bg-white/30 placeholder:text-[#5F5453]/50 border border-white/20 focus:border-white rounded-md w-full px-2 py-1.5 focus:outline-none border"
             />
             <span className="absolute right-0 top-0 h-full p-2 pb-4">
-                <button className="text-[#5F5453] h-full flex items-center justify-center">
+                <button className="text-white/30 focus:text-white h-full flex items-center justify-center">
                     <svg className="h-5 w-12" viewBox="0 0 364 322">
                     <g opacity="1">
                         <path
