@@ -1,6 +1,24 @@
-import React from 'react'
+import React, {useRef} from 'react';
+import { useMUD } from '../../MUDContext';
+import { Entity, Has, getComponentValueStrict } from "@latticexyz/recs";
+import { useComponentValue, useEntityQuery } from "@latticexyz/react";
 
 export const NavTop = () => {
+    const ref = useRef(null);
+    const {
+        components: { MapConfig, Player, BlockPerMove, Position, GameStart },
+        network: { playerEntity, singletonEntity },
+        systemCalls: { startGame, setBlocksPerMove},
+    } = useMUD();
+
+    const blockPerMove = useComponentValue(BlockPerMove, playerEntity)?.value;
+    const gameStarted = useComponentValue(GameStart, playerEntity)?.value;
+
+    const handleSetBlockPerMove = async () => {
+        //console.log(ref.current.value)
+        await setBlocksPerMove(parseInt(ref.current.value))
+    }
+
     return (
         <nav className="bg-[#6A7070] 
         flex flex-row items-center 
@@ -42,14 +60,25 @@ export const NavTop = () => {
             backgroundRepeat: "no-repeat", backgroundPosition: "center",
             backgroundSize: "cover"
                 }}
+
+            onClick={handleSetBlockPerMove}
         ></button>
-        <div className="ml-1 p-1 text-sm text-[#BBBCBC]
+        <div className="ml-1 p-1 text-sm text-[#e1e7e7]
             ">
-            <p className="text-center w-8/10 mb-1">Blocks Per Move</p>
-            <p className="w-full flex justify-center items-center">
-            <span> 4 </span>
+            <p className="text-center w-8/10 my-1
+                font-medival font-bold text-sm
+            ">
+                Blocks Per Move</p>
+            <p className="w-full flex justify-center items-center 
+            text-[#c3c7c7]
+            text-base font-extrabold">
+            <span> {blockPerMove | `x` } </span>
             <span className="mx-2">{`>>`}</span>
-            <span> 5 </span>
+            <span><input type="number" id="bpm" name="blocks per move"
+            defaultValue={blockPerMove | 5 } 
+            ref={ref}
+            className="w-10 bg-transparent text-center"
+            /></span>
             </p>
         </div>
         </div>
@@ -66,8 +95,8 @@ export const NavTop = () => {
             backgroundSize: "contain"
                 }}
             ></div>
-            <div className="flex-1 bg-transparent font-medival text-4xl
-            ml-7 text-xl text-[#BBBCBC]
+            <div className="flex-1 bg-transparent font-medival font-extrabold text-3xl 
+            ml-7 text-[#BBBCBC]
             ">
                 Planning
             </div>
@@ -75,14 +104,20 @@ export const NavTop = () => {
         </div>
 
         {/* score panel */}
-        <div className="h-full flex-1
+        <div className="h-full flex-1 flex justify-end items-center
         "
         style={{backgroundImage: "url(/assets/bag.png)",
         backgroundRepeat: "no-repeat", backgroundPosition: "right center",
         backgroundSize: "cover"
         }}
         >
-
+                <button className={`bg-transparent h-full w-32
+                border rounded-3xl ${ gameStarted ? 'border-red-500' : 'border-[#383D3E]/20'}
+                `}
+                onClick={async ()=>{
+                    await startGame();
+                }}
+                ></button>
             </div>
         </nav>
     )

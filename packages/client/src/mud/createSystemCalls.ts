@@ -33,8 +33,14 @@ export function createSystemCalls(
   };
 
   const startGame = async () => {
-
+    const tx = await worldSend("startGame", []);
+    await awaitStreamValue(txReduced$, (txHash) => txHash === tx.hash);
   };
+
+  const setBlocksPerMove = async (blocksPerMove: number) => {
+    const tx = await worldSend("setBlocksPerMove", [blocksPerMove]);
+    await awaitStreamValue(txReduced$, (txHash) => txHash === tx.hash);
+  }
 
   const moveTo = async (inputX: number, inputY: number) => {
     if (!playerEntity) {
@@ -150,5 +156,7 @@ export function createSystemCalls(
     spawn,
     throwBall,
     fleeEncounter,
+    startGame,
+    setBlocksPerMove
   };
 }

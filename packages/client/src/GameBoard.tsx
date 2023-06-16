@@ -21,9 +21,6 @@ export const GameBoard = () => {
 
   const canSpawn = useComponentValue(Player, playerEntity)?.value !== true;
 
-  const blockPerMove = useComponentValue(BlockPerMove, playerEntity)?.value;
-  console.log("blockPerMove: ", blockPerMove)
-
   const players = useEntityQuery([Has(Player), Has(Position)]).map((entity) => {
     const position = getComponentValueStrict(Position, entity);
     return {

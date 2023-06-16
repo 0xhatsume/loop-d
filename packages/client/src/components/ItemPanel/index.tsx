@@ -1,7 +1,16 @@
-import React from 'react'
+import React from 'react';
+import {useAtom} from 'jotai';
+import {atomWithObservable} from 'jotai/utils';
+import { useMUD } from '../../MUDContext';
 
 export const ItemPanel = () => {
+    const {
+            network: {network: { blockNumber$ }}
+        } = useMUD();
 
+    const blockNumberAtom = atomWithObservable(()=>blockNumber$)
+    const [blockNumber] = useAtom(blockNumberAtom);
+    //const blockNumber = 8888888
     return (
     
     <div className="bg-[#697070]
@@ -22,7 +31,7 @@ export const ItemPanel = () => {
             text-[#BEBFC1] font-extrabold
             ">
                 <div>BlockNumber</div>
-                <div>88888888</div>
+                <div>{blockNumber}</div>
             </div>
 
         </div>
