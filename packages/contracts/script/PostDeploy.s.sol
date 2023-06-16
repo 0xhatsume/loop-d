@@ -70,15 +70,13 @@ contract PostDeploy is Script {
     ];
 
     uint256 rand = uint256(keccak256(abi.encode(
-      world, blockhash(block.number - 1), block.difficulty))
+      "bestvrf", blockhash(block.number - 1), block.difficulty))
       );
     
     uint8 homePosition = uint8(rand % 72);
+    // uint8 homePathX = pathX[homePosition];
+    // uint8 homePathY = pathY[homePosition];
     console.log("Home Position of ", homePosition, pathX[homePosition], pathY[homePosition]);
-    // set home position
-    // bytes32 _world = addressToEntityKey(worldAddress);
-    // Home.set(_world, homePosition, pathX[homePosition], pathY[homePosition]);
-    //MapSystem.setHome(world, homePosition, pathX[homePosition], pathY[homePosition]);
 
     uint32 height = uint32(map.length);
     uint32 width = uint32(map[0].length);
@@ -106,6 +104,11 @@ contract PostDeploy is Script {
 
       }
     }
+
+    // set home position
+    // bytes32 _world = addressToEntityKey(worldAddress);
+    // Home.set(_world, homePosition, pathX[homePosition], pathY[homePosition]);
+    //MapSystem.setHome(world, homePosition, pathX[homePosition], pathY[homePosition]);
 
     MapConfig.set(world, width, height, terrain, pathX,pathY);
 
