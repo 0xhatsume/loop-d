@@ -1,6 +1,6 @@
 import React from 'react';
-import { NavTop, ItemPanel } from '../../components';
-import {  DemoBoard } from '../../components';
+import { NavTop } from '../../components';
+import {  DemoBoard, DemoItemPanel } from '../../components';
 
 export const Demo = () => {
   return (
@@ -11,7 +11,7 @@ export const Demo = () => {
             <DemoBoard />
             </div>
         </div>
-        <ItemPanel/>
+        <DemoItemPanel/>
     </div>
   )
 }

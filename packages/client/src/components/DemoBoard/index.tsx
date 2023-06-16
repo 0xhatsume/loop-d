@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useAtom } from 'jotai';
-import { demoBlockNumberAtom } from '../../store';
+import { demoBlockNumberAtom, demoCounterAtom } from '../../store';
 
 export const DemoBoard = () => {
 
@@ -59,7 +59,7 @@ export const DemoBoard = () => {
   const width = boardCoords[0].length;
 
   const [demoBlockNumber, setDemoBlockNumber] = useAtom(demoBlockNumberAtom);
-  const [counter, setCounter] = useState(0);
+  const [counter, setCounter] = useAtom(demoCounterAtom);
   useEffect(() => {
     const interval = setInterval(() => {
       setDemoBlockNumber((prevBlockNumber) => prevBlockNumber + 1);
@@ -94,8 +94,11 @@ export const DemoBoard = () => {
               <div 
                 key={`${x}-${y}`}
                 className={`
-                ${((counter>=4)&& ((x==0||x==8) || (y==0||y==8)))?
-                  'bg-black':'bg-blue-500'}
+                ${((counter>=4 && counter<=7)&& ((x==0||x==8) || (y==0||y==8)))?
+                  'bg-black':
+                  ((counter>=8)&& ((x<=1||x>=7) || (y<=1||y>=7)))?
+                  'bg-black':
+                  'bg-[#697070]'}
                 text-center
                 border border-[#383D3E]`}
                 >
@@ -165,6 +168,27 @@ export const DemoBoard = () => {
                     }}
                     />)
                   }
+                  { 
+                    (counter==4 && x==5 && y==2)
+                    && 
+                    (<div className="z-20 w-full h-full" 
+                    style={{ backgroundImage: `url(${fruitgif})`,
+                    backgroundRepeat: "no-repeat", backgroundPosition: "center",
+                    backgroundSize: "cover"
+                    }}
+                    />)
+                  }
+                  { 
+                    (counter>=8 && x==3 && y==3)
+                    && 
+                    (<div className="z-20 w-full h-full" 
+                    style={{ backgroundImage: `url(${fruitgif})`,
+                    backgroundRepeat: "no-repeat", backgroundPosition: "center",
+                    backgroundSize: "cover"
+                    }}
+                    />)
+                  }
+                  {/* {(x==0 && y==0)?counter:""} */}
               </div>
             )
           })
