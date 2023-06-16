@@ -1,8 +1,7 @@
 import { useComponentValue } from "@latticexyz/react";
 import { SyncState } from "@latticexyz/network";
 import { useMUD } from "./MUDContext";
-import { GameBoard } from "./GameBoard";
-import { NavTop, ItemPanel } from "./components";
+import { Home } from "./pages/Home";
 import '../index.css';
 
 export const App = () => {
@@ -19,23 +18,15 @@ export const App = () => {
 
   return (
     <div className="w-screen h-screen">
-      
-        <div className="flex w-full">
-          <div className="grow flex flex-col items-center">
-            <NavTop />
-            {
+      {
                 loadingState.state !== SyncState.LIVE ? (
                   <div>
                     {loadingState.msg} ({Math.floor(loadingState.percentage)}%)
                   </div>
                 ) : 
             (
-              <GameBoard />
+              <Home />
             )}
-          </div>
-          <ItemPanel/>
-        </div>
-      
       
     </div>
   );

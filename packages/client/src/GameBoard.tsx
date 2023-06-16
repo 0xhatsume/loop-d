@@ -12,9 +12,7 @@ export const GameBoard = () => {
   //useKeyboardMovement();
 
   const {
-    components: { Encounter, MapConfig, Monster, Player, 
-      BlockPerMove,
-      Position },
+    components: { Encounter, MapConfig, Monster, Player, Position },
     network: { playerEntity, singletonEntity },
     systemCalls: { spawn },
   } = useMUD(); 
