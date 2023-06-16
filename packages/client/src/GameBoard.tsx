@@ -12,12 +12,17 @@ export const GameBoard = () => {
   //useKeyboardMovement();
 
   const {
-    components: { Encounter, MapConfig, Monster, Player, Position },
+    components: { Encounter, MapConfig, Monster, Player, 
+      BlockPerMove,
+      Position },
     network: { playerEntity, singletonEntity },
     systemCalls: { spawn },
-  } = useMUD();
+  } = useMUD(); 
 
   const canSpawn = useComponentValue(Player, playerEntity)?.value !== true;
+
+  const blockPerMove = useComponentValue(BlockPerMove, playerEntity)?.value;
+  console.log("blockPerMove: ", blockPerMove)
 
   const players = useEntityQuery([Has(Player), Has(Position)]).map((entity) => {
     const position = getComponentValueStrict(Position, entity);

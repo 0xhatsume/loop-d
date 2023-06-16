@@ -70,6 +70,9 @@ export const GameMap = ({
                 gridRow: y + 1,
                 backgroundImage: 
                   terrainEmoji === "tree" ? "url(/assets/path.png)" : "",
+                backgroundRepeat: "no-repeat", 
+                backgroundPosition: "center",
+                backgroundSize: "contain",
               }}
               onClick={() => {
                 onTileClick?.(x, y);
