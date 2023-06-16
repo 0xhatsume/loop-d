@@ -162,6 +162,21 @@ export function defineContractComponents(world: World) {
         }
       );
     })(),
+    GameStartTime: (() => {
+      const tableId = new TableId("", "GameStartTime");
+      return defineComponent(
+        world,
+        {
+          value: RecsType.BigInt,
+        },
+        {
+          metadata: {
+            contractId: tableId.toHexString(),
+            tableId: tableId.toString(),
+          },
+        }
+      );
+    })(),
     Home: (() => {
       const tableId = new TableId("", "Home");
       return defineComponent(
