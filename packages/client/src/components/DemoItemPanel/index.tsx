@@ -64,28 +64,28 @@ export const DemoItemPanel = () => {
             name="Player1" 
             ft={player1ftState[counter]}
             stake="0.1"
-            status="Active"
+            status={player1ftState[counter]==0?"Dead":"Alive"}
             imageurl='/assets/warrior1.gif'
             />
             <RankingSlot 
             name="Player2" 
             ft={player2ftState[counter]}
             stake="0.1"
-            status="Active"
+            status={player2ftState[counter]==0?"Dead":"Alive"}
             imageurl='/assets/warrior2.gif'
             />
             <RankingSlot 
             name="Player3" 
             ft={player3ftState[counter]}
             stake="0.1"
-            status="Active"
+            status={player3ftState[counter]==0?"Dead":"Alive"}
             imageurl='/assets/warrior3.gif'
             />
             <RankingSlot 
             name="Player4" 
             ft={player4ftState[counter]}
             stake="0.1"
-            status="Active"
+            status={player4ftState[counter]==0?"Dead":"Alive"}
             imageurl='/assets/warrior4.gif'
             />
 

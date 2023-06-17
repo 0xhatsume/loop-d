@@ -5,7 +5,7 @@ export const RankingSlot = ({
     textcolor="[#BEBFC1]", imageurl=""}) => {
   return (
     <div className={`w-full py-2 px-4
-                text-medival text-${textcolor} text-sm
+                text-medival text-${textcolor} text-xs
                 grid grid-cols-7
                 border-y rounded-md border-gray-600
                 `}>
