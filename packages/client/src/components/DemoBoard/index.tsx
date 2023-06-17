@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useAtom } from 'jotai';
-import { demoBlockNumberAtom, demoCounterAtom } from '../../store';
+import { demoBlockNumberAtom, demoCounterAtom,
+  demoPauseAtom
+  } from '../../store';
 
 export const DemoBoard = () => {
 
@@ -60,27 +62,30 @@ export const DemoBoard = () => {
 
   const [demoBlockNumber, setDemoBlockNumber] = useAtom(demoBlockNumberAtom);
   const [counter, setCounter] = useAtom(demoCounterAtom);
+  const [pause, setPause] = useAtom(demoPauseAtom);
   useEffect(() => {
     const interval = setInterval(() => {
-      setDemoBlockNumber((prevBlockNumber) => prevBlockNumber + 1);
-      
-      setCounter((prevCounter) => {
-        const count = prevCounter==9? 0: prevCounter + 1;
-        setPlayer1coords(player1states[count]);
-        setPlayer2coords(player2states[count]);
-        setPlayer3coords(player3states[count]);
-        setPlayer4coords(player4states[count]);
-        setFruit1coords(fruit1states[count]);
-        setFruit2coords(fruit2states[count]);
-        setFruit3coords(fruit3states[count]);
-        return count;
-      });
 
+      if (!pause){
+        setDemoBlockNumber((prevBlockNumber) => prevBlockNumber + 1);
+        
+        setCounter((prevCounter) => {
+          const count = prevCounter==9? 0: prevCounter + 1;
+          setPlayer1coords(player1states[count]);
+          setPlayer2coords(player2states[count]);
+          setPlayer3coords(player3states[count]);
+          setPlayer4coords(player4states[count]);
+          setFruit1coords(fruit1states[count]);
+          setFruit2coords(fruit2states[count]);
+          setFruit3coords(fruit3states[count]);
+          return count;
+        });
+      }
       
-    }, 3000); // 3 seconds
+    }, 2000); // 3 seconds
 
     return () => clearInterval(interval);
-  }, []);
+  }, [pause]);
 
   return (
     <div className={`w-[40rem] h-[40rem]
