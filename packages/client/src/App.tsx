@@ -1,8 +1,11 @@
 import { useComponentValue } from "@latticexyz/react";
 import { SyncState } from "@latticexyz/network";
 import { useMUD } from "./MUDContext";
-import { GameBoard } from "./GameBoard";
-import { NavTop, ItemPanel } from "./components";
+import { Home } from "./pages/Home";
+import { Demo } from "./pages/Demo";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import '../index.css';
 
 export const App = () => {
   const {
@@ -18,19 +21,21 @@ export const App = () => {
 
   return (
     <div className="w-screen h-screen">
-      {loadingState.state !== SyncState.LIVE ? (
-        <div>
-          {loadingState.msg} ({Math.floor(loadingState.percentage)}%)
-        </div>
-      ) : (
-        <div className="flex w-full">
-          <div className="grow flex flex-col items-center">
-            <NavTop />
-            <GameBoard />
-          </div>
-          <ItemPanel/>
-        </div>
-      )}
+      {
+                loadingState.state !== SyncState.LIVE ? (
+                  <div>
+                    {loadingState.msg} ({Math.floor(loadingState.percentage)}%)
+                  </div>
+                ) : 
+            (
+              <Router>
+                <Routes>
+                  <Route path="/" element={<Home />} />
+                  <Route path="/demo" element={<Demo />} />
+                </Routes>
+              </Router>
+            )}
+      
     </div>
   );
 };

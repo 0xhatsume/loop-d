@@ -3,6 +3,9 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        'medival': ['MedievalSharp', 'san-serif'],
+      },
       animation: {
         battle: "battle 2s linear 1",
       },

@@ -45,7 +45,8 @@ export const GameMap = ({
   }, [encounter]);
 
   return (
-    <div className="inline-grid bg-[#3A403D] overflow-hidden mt-8">
+    <div className="inline-grid w-[44rem] h-[44rem]
+      bg-[#3A403D] overflow-hidden mt-8">
       {rows.map((y) =>
         columns.map((x) => {
 
@@ -63,13 +64,16 @@ export const GameMap = ({
           return (
             <div
               key={`${x},${y}`}
-              className="w-8 h-8 flex items-center justify-center 
+              className="w-full h-full p-1 flex items-center justify-center 
               cursor-pointer hover:ring"
               style={{
                 gridColumn: x + 1,
                 gridRow: y + 1,
                 backgroundImage: 
                   terrainEmoji === "tree" ? "url(/assets/path.png)" : "",
+                backgroundRepeat: "no-repeat", 
+                backgroundPosition: "center",
+                backgroundSize: "contain",
               }}
               onClick={() => {
                 onTileClick?.(x, y);
@@ -89,41 +93,20 @@ export const GameMap = ({
                 ></div>
               ) : null}
 
-              {/* Terrain and Player Emoji */}
-              <div className="flex flex-wrap gap-1 items-center justify-center relative">
-                
-                {/* terrain Emoji */}
-
-                {/* {terrainEmoji ? (
-                  // <div className="absolute inset-0 flex 
-                  // items-center justify-center text-3xl pointer-events-none">
-                  //   {terrainEmoji}
-                  // </div>
-                  (terrainEmoji === "tree" ? 
-                    <div className="w-8 h-8 absolute inset-0 flex 
-                    items-center justify-center text-3xl pointer-events-none"
-                    style={{backgroundImage: "url(/assets/path.png)", 
-                    backgroundRepeat: "no-repeat", backgroundPosition: "center",
-                    backgroundSize: "cover"}}
-                    >
-                      </div>
-                      : null)
-                ) : null} */}
 
                 {/* players icon */}
-                <div className="relative">
+                <>
                   {playersHere?.map((p) => (
                     // <span key={p.entity}>{p.emoji}</span>
-                    <div className="z-20 w-8 h-8" 
+                    <div className="w-full h-full z-20" 
                     style={{backgroundImage: "url(/assets/claymorebash.gif)",
                     backgroundRepeat: "no-repeat", backgroundPosition: "center",
                     backgroundSize: "cover"
                     }}
                     key={p.entity}></div>
                   ))}
-                </div>
+                </>
 
-              </div>
 
             </div>
           );
@@ -144,5 +127,6 @@ export const GameMap = ({
         </div>
       ) : null}
     </div>
+
   );
 };

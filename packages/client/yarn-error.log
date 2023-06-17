@@ -1,0 +1,70 @@
+Arguments: 
+  /usr/local/bin/node /home/zeldon/.yarn/bin/yarn.js add zustand
+
+PATH: 
+  /home/zeldon/.local/share/solana/install/active_release/bin:/home/zeldon/.yarn/bin:/home/zeldon/.config/yarn/global/node_modules/.bin:/home/zeldon/.local/share/solana/install/active_release/bin:/home/zeldon/.cargo/bin:/home/zeldon/conda3wsl/bin:/home/zeldon/conda3wsl/condabin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/mnt/c/Users/zeldon/AppData/Local/cloud-code/installer/google-cloud-sdk/bin:/mnt/c/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.1/bin:/mnt/c/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.1/libnvvp:/mnt/c/Users/zeldon/anaconda3/envs/py310:/mnt/c/Program Files (x86)/Intel/iCLS Client:/mnt/c/Program Files/Intel/iCLS Client:/mnt/c/Program Files/Oculus/Support/oculus-runtime:/mnt/c/Python39/Scripts:/mnt/c/Python39:/mnt/c/Windows/system32:/mnt/c/Windows:/mnt/c/Windows/System32/Wbem:/mnt/c/Windows/System32/WindowsPowerShell/v1.0:/mnt/c/Windows/System32/OpenSSH:/mnt/c/Program Files/nodejs:/mnt/c/ProgramData/chocolatey/bin:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/DAL:/mnt/c/Program Files (x86)/Intel/Intel(R) Management Engine Components/IPT:/mnt/c/Program Files/Intel/Intel(R) Management Engine Components/IPT:/mnt/c/Program Files/Cryptowatch Desktop:/Docker/host/bin:/mnt/c/Program Files/NVIDIA Corporation/Nsight Compute 2023.1.1:/mnt/c/Users/zeldon/anaconda3/envs/py310:/mnt/c/Users/zeldon/.console-ninja/.bin:/mnt/c/Users/zeldon/.cargo/bin:/mnt/c/Users/zeldon/anaconda3:/mnt/c/Users/zeldon/anaconda3/Library/mingw-w64/bin:/mnt/c/Users/zeldon/anaconda3/Library/usr/bin:/mnt/c/Users/zeldon/anaconda3/Library/bin:/mnt/c/Users/zeldon/anaconda3/Scripts:/mnt/c/Users/zeldon/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/zeldon/AppData/Roaming/npm:/mnt/c/Users/zeldon/AppData/Local/Programs/Microsoft VS Code/bin:/snap/bin:/usr/local/go/bin:/home/zeldon/go/bin:/home/zeldon/.foundry/bin
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  18.16.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: ENOENT: no such file or directory, copyfile '/home/zeldon/.cache/yarn/v6/npm-glob-parent-6.0.2-6d237d99083950c79290f24c7642a3de9a28f9e3-integrity/node_modules/glob-parent/LICENSE' -> '/mnt/f/Projects/hackathons/web3games/loop-d/packages/client/node_modules/tailwindcss/node_modules/glob-parent/LICENSE'
+
+npm manifest: 
+  {
+    "name": "client",
+    "version": "0.0.0",
+    "private": true,
+    "license": "MIT",
+    "type": "module",
+    "scripts": {
+      "build": "vite build",
+      "dev": "wait-port localhost:8545 && vite",
+      "initialize": "pnpm build",
+      "preview": "vite preview",
+      "test": "tsc --noEmit"
+    },
+    "dependencies": {
+      "@ethersproject/providers": "^5.7.2",
+      "@latticexyz/common": "2.0.0-alpha.1.177",
+      "@latticexyz/dev-tools": "2.0.0-alpha.1.177",
+      "@latticexyz/network": "2.0.0-alpha.1.177",
+      "@latticexyz/react": "2.0.0-alpha.1.177",
+      "@latticexyz/recs": "2.0.0-alpha.1.177",
+      "@latticexyz/schema-type": "2.0.0-alpha.1.177",
+      "@latticexyz/std-client": "2.0.0-alpha.1.177",
+      "@latticexyz/utils": "2.0.0-alpha.1.177",
+      "@latticexyz/world": "2.0.0-alpha.1.177",
+      "@wagmi/chains": "^0.2.22",
+      "contracts": "workspace:*",
+      "ethers": "^5.7.2",
+      "react": "^18.2.0",
+      "react-dom": "^18.2.0",
+      "react-toastify": "^9.1.2",
+      "tailwind-merge": "^1.11.0"
+    },
+    "devDependencies": {
+      "@types/react": "^18.0.11",
+      "@types/react-dom": "^18.0.11",
+      "@vitejs/plugin-react": "^3.1.0",
+      "autoprefixer": "^10.4.14",
+      "eslint-plugin-react": "7.31.11",
+      "eslint-plugin-react-hooks": "4.6.0",
+      "postcss": "^8.4.21",
+      "tailwindcss": "^3.3.0",
+      "vite": "^4.2.1",
+      "wait-port": "^1.0.4"
+    }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
