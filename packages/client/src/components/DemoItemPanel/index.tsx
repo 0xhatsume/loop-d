@@ -35,9 +35,10 @@ export const DemoItemPanel = () => {
         }}
         >
             <div className="w-1/2 font-medival text-xl text-right px-4 pt-3
+            bg-[#697070] rounded-lg
             text-[#BEBFC1] font-extrabold
             ">
-                <div>BlockNumber</div>
+                <div className="whitespace-break-spaces sm:text-sm">Block Number</div>
                 <div>{counter}</div>
             </div>
 

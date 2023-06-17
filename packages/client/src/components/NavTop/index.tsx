@@ -57,8 +57,8 @@ export const NavTop = () => {
             hover:cursor-pointer
             "
             style={{backgroundImage: "url(/assets/hourglass.png)",
-            backgroundRepeat: "no-repeat", backgroundPosition: "center",
-            backgroundSize: "cover"
+            backgroundRepeat: "no-repeat", backgroundPosition: "top center",
+            backgroundSize: "contain"
                 }}
 
             onClick={handleSetBlockPerMove}

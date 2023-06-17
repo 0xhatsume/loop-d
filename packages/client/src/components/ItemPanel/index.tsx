@@ -30,7 +30,7 @@ export const ItemPanel = () => {
             <div className="w-1/2 font-medival text-xl text-right px-4 pt-3
             text-[#BEBFC1] font-extrabold
             ">
-                <div>BlockNumber</div>
+                <div className="sm:text-xs md:text-sm">Block Number</div>
                 <div>{blockNumber}</div>
             </div>
 

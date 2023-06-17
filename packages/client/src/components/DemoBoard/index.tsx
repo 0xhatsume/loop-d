@@ -83,7 +83,7 @@ export const DemoBoard = () => {
   }, []);
 
   return (
-    <div className={`w-[45rem] h-[45rem]
+    <div className={`w-[40rem] h-[40rem]
     mt-8 inline-grid grid-rows-9 grid-cols-9
     grid-flow-cols
     `}>
